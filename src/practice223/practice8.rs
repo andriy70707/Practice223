@@ -1,29 +1,24 @@
-#[cfg(test)]
-mod tests {
-    use super::*;
+fn swap_case(s: &str) -> String {
+    let mut result = String::new();
+    for c in s.chars() {
+        //регістр верхній, змінюємо на нижній
+        if c.is_uppercase() {
+            result.push(c.to_lowercase().next().unwrap());
+        //регістр нижній, змінюємо на верхній
+        } else if c.is_lowercase() {
+            result.push(c.to_uppercase().next().unwrap());
 
-    #[test]
-    fn test_swap_case_example() {
-        assert_eq!(swap_case("Привіт!"), "пРиВіТ сВіТ!");
+        } else {
+            result.push(c);
+        }
     }
-}
-
-//регістр символів
-fn swap_case(text: &str) -> String {
-    text.chars()
-        .map(|c| {
-            if c.is_uppercase() {
-                c.to_lowercase().to_string()
-            } else {
-                c.to_uppercase().to_string()
-            }
-        })
-        .collect()
+    result
 }
 
 fn main() {
-    let text = "привіт!";
-    let result = swap_case(text);
-    println!("Original: {}", text);
-    println!("Swapped case: {}", result);
+    let data = "Hello world!";
+    let result = swap_case(data);
+
+    assert_eq!(result, "Hello world!");
+    println!("{}", result);
 }
